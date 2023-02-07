@@ -17,10 +17,24 @@ class Generator():
         return self.dataValues[random.randint(0, len(self.dataValues))]
 
     def getSpecificOpening(self, specificOpening):
+        openingsFound = []
+
         if isinstance(specificOpening, str):
             for opening in self.dataValues:
                 if opening[1].lower().__contains__(specificOpening.lower()):
-                    return f"The moves for the {opening[1]} are {opening[2]}"
+                    openingsFound.append(opening)
+
+            if len(openingsFound) > 1:
+                print("Multiple openings were found with that name:\n")
+                i = 0
+                for opening in openingsFound:
+                    print(f"#{i + 1} is the {opening[1]} opening.\n")
+                    i += 1
+                chosenOpening = openingsFound[int(input("Please select the one you'd like.")) - 1]
+
+                return f"The moves for the {chosenOpening[1]} are {chosenOpening[2]}"
+            elif len(openingsFound) == 1:
+                return f"The moves for the {openingsFound[0][1]} are {openingsFound[0][2]}"
             return f"No opening named {specificOpening} was found."
         else: 
             return f"Invalid parameter passed. Expecting type str but received {type(specificOpening)}"
@@ -35,7 +49,7 @@ def testCode():
     gen = Generator("https://raw.githubusercontent.com/tomgp/chess-canvas/master/pgn/chess_openings.csv")
     randomOpening = gen.getRandomOpening()
     print(f"The random opening selected is the {randomOpening[1]}.\nThe opening's ECO is {randomOpening[0]}.\nThe opening's moves is {randomOpening[2]}")
-    specificOpening = "Alekhine"
+    specificOpening = "Krazy"
     specificOpeningMoves = gen.getSpecificOpening(specificOpening)
     print(f"{specificOpeningMoves}")
     
