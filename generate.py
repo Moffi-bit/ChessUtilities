@@ -4,18 +4,22 @@ import io
 import random
 
 class Generator():
+    # Constructor 
     def __init__(self, urlToCSV):
         self.dataValues = self.loadCSV(urlToCSV)
     
+    # Load the chess opening data from a url 
     def loadCSV(self, url):
         download = requests.get(url).content
 
         dataFrame = pd.read_csv(io.StringIO(download.decode('utf-8')))
         return dataFrame.values
     
+    # Select a random chess opening and return relevant information
     def getRandomOpening(self):
         return self.dataValues[random.randint(0, len(self.dataValues))]
 
+    # Takes in an opening and returns the moves for that opening if it's able to find it in the databasr/csv
     def getSpecificOpening(self, specificOpening):
         openingsFound = []
 
@@ -45,14 +49,17 @@ class Generator():
     def getSpecificFEN(self):
         print("TODO")
 
+# Demo driver 
 def testCode():
     gen = Generator("https://raw.githubusercontent.com/tomgp/chess-canvas/master/pgn/chess_openings.csv")
+
     randomOpening = gen.getRandomOpening()
     print(f"The random opening selected is the {randomOpening[1]}.\nThe opening's ECO is {randomOpening[0]}.\nThe opening's moves is {randomOpening[2]}")
     specificOpening = "Krazy"
     specificOpeningMoves = gen.getSpecificOpening(specificOpening)
     print(f"{specificOpeningMoves}")
-    
+
+# (I plan on implementing args functionality soon)
 def main():
     testCode()
 
