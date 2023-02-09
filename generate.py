@@ -27,7 +27,7 @@ class Generator():
         if self.specificOpening != None:
             temp = ""
             for element in self.specificOpening:
-                temp += element
+                temp += element + " "
             self.specificOpening = temp
 
         if isinstance(self.specificOpening, str):
@@ -70,10 +70,11 @@ class Generator():
                 i += 1
             chosenOpening = openingsFound[int(input("Please select the one you'd like.\n")) - 1]
 
-            return f"The moves for the {chosenOpening[1]} are {chosenOpening[2]}\n"
+            print(f"The moves for the {chosenOpening[1]} are {chosenOpening[2]}\n")
         elif len(openingsFound) == 1:
-            return f"The moves for the {openingsFound[0][1]} are {openingsFound[0][2]}\n"
-        return f"No opening named {self.specificOpening} was found.\n"
+            print(f"The moves for the {openingsFound[0][1]} are {openingsFound[0][2]}\n")
+        else:   
+            print(f"No opening named {self.specificOpening}was found.\n")
 
     def getRandomFEN(self):
         print("TODO : rand fen")
