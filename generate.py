@@ -82,6 +82,8 @@ class Generator():
     def getSpecificFEN(self):
         print("TODO : specific fen")
 
+    def modifyFen(self):
+        print("TODO : mod fen")
 def main():
     gen = Generator()
     gen.evaluateArguments()
