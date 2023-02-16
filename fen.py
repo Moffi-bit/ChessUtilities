@@ -1,6 +1,5 @@
 import random
 
-
 class Fen():
     # Starting FEN: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
     # White pieces are capitalized, black pieces are left lowercase, empty cells are denoted by a number 
@@ -45,18 +44,18 @@ class Fen():
             
         if sum > 0:
             processedRow += str(sum)
-
+            
         return processedRow
             
     def getNewFen(self):
         self.createFen()
         fenString = ""
 
-        for i in self.fen:
-            if i != self.fen[len(self.fen) - 1]:
-                fenString += i + "/"
+        for i in range(0, len(self.fen)):
+            if i != len(self.fen) - 1:
+                fenString += self.fen[i] + "/"
             else:
-                fenString += i
+                fenString += self.fen[i]
 
         self.refresh()
 
