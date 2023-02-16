@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import io
 import random
+import fen
 
 class Generator():
     # Constructor 
@@ -77,16 +78,11 @@ class Generator():
             print(f"No opening named {self.specificOpening}was found.\n")
 
     def getRandomFEN(self):
-        print("TODO : rand fen")
+        randFen = fen.Fen()
+        return randFen.getNewFen()
 
     def getSpecificFEN(self):
         print("TODO : specific fen")
 
     def modifyFen(self):
         print("TODO : mod fen")
-def main():
-    gen = Generator()
-    gen.evaluateArguments()
-
-if __name__ == '__main__':
-    main()
