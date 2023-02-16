@@ -8,7 +8,6 @@ class Fen():
     def __init__(self):
         self.fen = []
         self.pieces = [("r", 2), ("n", 2), ("b", 2), ("q", 1), ("k", 1) ,("R", 2), ("N", 2), ("B", 2), ("Q", 1), ("K", 1)]
-        print(self.randomPieceForRow())
 
     def createFenRow(self):
         sum = 0
@@ -16,21 +15,20 @@ class Fen():
         piece = True
 
         while sum < 8:
-            print(f"Before: {sum} + {row}")
-
             if piece and self.piecesLeft():
                 sum += 1
                 row += self.randomPieceForRow()
                 piece = False
             else:
-                print("In empty cell")
                 value = self.randomEmptyCellsForRow(sum)
+
                 while sum + value > 8:
                     value = self.randomEmptyCellsForRow(sum)
+
                 row += str(value)
                 sum += value
                 piece = True
-            print(f"After: {sum} + {row}")
+
         row = self.processRow(row)
         return row
     
@@ -39,12 +37,10 @@ class Fen():
         sum = 0
 
         for i in row:
-            print(i)
             if str(i).isdigit():
                 sum += int(i)
             else:
                 processedRow += str(sum) + i if sum > 0 else i
-                print("sum" + str(sum))
                 sum = 0
             
         if sum > 0:
@@ -62,7 +58,13 @@ class Fen():
             else:
                 fenString += i
 
+        self.refresh()
+
         return fenString
+
+    def refresh(self):
+        self.fen = []
+        self.pieces = [("r", 2), ("n", 2), ("b", 2), ("q", 1), ("k", 1) ,("R", 2), ("N", 2), ("B", 2), ("Q", 1), ("K", 1)]
 
     def createFen(self):
         while len(self.fen) != 8:
